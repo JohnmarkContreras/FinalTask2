@@ -14,23 +14,10 @@
         function Increment(){
             item += 1;
             document.getElementById("items").value = item;
-        }
-
-        function Decrement(){
-            if (item <= 0) {
-                item = 1;
-            }
-            item -= 1;
-            document.getElementById("items").value = item;
-            
-        }
-        
-        
-        function CheckOut() {
             let totalItem = document.getElementById("items").value;
             const product = 15.97;
             const productTotal = parseFloat(product) * parseFloat(totalItem);
-            document.getElementById("item").innerHTML = "Items" + "("+totalItem+")";
+            document.getElementById("item").innerHTML = "items" + "("+totalItem+")";
             document.getElementById("total").innerHTML = dollarSign + productTotal.toFixed(2);
             
             const SPfee = 4.99;
@@ -46,13 +33,39 @@
             document.getElementById("FinalTotal").innerHTML = dollarSign + FinalTotal.toFixed(2);
         }
 
+        function Decrement(){
+            if (item == 0) {
+                item = 0;
+            }else{
+                item -= 1;
+            }
+            document.getElementById("items").value = item;
+            let totalItem = document.getElementById("items").value;
+            const product = 15.97;
+            const productTotal = parseFloat(product) * parseFloat(totalItem);
+            document.getElementById("item").innerHTML = "items" + "("+totalItem+")";
+            document.getElementById("total").innerHTML = dollarSign + productTotal.toFixed(2);
+            
+            const SPfee = 4.99;
+            document.getElementById("SPfee").innerHTML = dollarSign + SPfee;
+
+            totalBeforeTax = parseFloat(SPfee) + parseFloat(productTotal);
+            document.getElementById("TotalBeforeTax").innerHTML = dollarSign+totalBeforeTax.toFixed(2);
+
+            EstimatedTax = (parseFloat(totalBeforeTax) / 100) * 10;
+            document.getElementById("EstimatedTax").innerHTML = dollarSign + EstimatedTax.toFixed(2);
+            FinalTotal = parseFloat(totalBeforeTax) + parseFloat(EstimatedTax);
+            document.getElementById("FinalTotal").innerHTML = dollarSign + FinalTotal.toFixed(2);
+            
+        }
+
         function DeleteData(){
             var inputs = document.querySelectorAll('input[type="text"]');
             for(var i = 0; i < inputs.length; i++) {
             inputs[i].value = "";
             }
             item = 0;
-            document.getElementById("item").innerHTML = "Items";
+            document.getElementById("item").innerHTML = "items";
             document.getElementById("total").innerHTML = "";
             document.getElementById("Sfee").innerHTML = "";
             document.getElementById("SPfee").innerHTML = "";
@@ -77,10 +90,6 @@
                     <td>Shipping and Handling Fee: </td>
                     <td><input type="text" size="2" id="Sfee" placeholder="$4.99"></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td><button id="btn" onclick="CheckOut()">Place Order</button></td>
-                </tr>
             </table>
 
             <div class="CheckOut">
@@ -90,7 +99,7 @@
                     </tr>
 
                     <tr>
-                        <td><p id="item">Items</p></td>
+                        <td><p id="item">items</p></td>
                         <td id="total"></td>
                     </tr>
 
