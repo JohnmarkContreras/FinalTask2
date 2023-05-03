@@ -17,11 +17,12 @@
         }
 
         function Decrement(){
+            if (item <= 0) {
+                item = 1;
+            }
             item -= 1;
             document.getElementById("items").value = item;
-            if (item === 0) {
-                item == item++;
-            }
+            
         }
         
         
